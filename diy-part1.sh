@@ -72,4 +72,3 @@ if [ ! -f .config ];then
 cp defconfig .config
 echo "Default .config created."
 fi
-
