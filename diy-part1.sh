@@ -16,11 +16,15 @@
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 
+# Add jerrykuku's vssr
+git clone https://github.com/jerrykuku/lua-maxminddb.git ./package/lean/lua-maxminddb
+git clone https://github.com/jerrykuku/luci-app-vssr.git ./package/lean/luci-app-vssr
+
 # Add HomeLede prepareCompile.sh
 disablePkgsList="
+./feeds/xiaoqingfeng/softethervpn5
 ./feeds/pw/chinadns-ng 
 ./feeds/pw/ipt2socks 
-./feeds/lienol/luci-app-softethervpn 
 ./package/lean/luci-app-kodexplorer 
 ./package/lean/luci-lib-docker 
 ./package/lean/luci-app-dockerman 
@@ -46,7 +50,6 @@ disablePkgsList="
 ./feeds/packages/net/kcptun 
 ./feeds/packages/net/smartdns 
 ./feeds/packages/net/xtables-addons 
-./feeds/packages/net/softethervpn5 
 ./feeds/luci/applications/luci-app-sqm
 "
 
@@ -67,8 +70,3 @@ done
 
 ./scripts/feeds update -i
 ./scripts/feeds install -a
-
-if [ ! -f .config ];then
-cp defconfig .config
-echo "Default .config created."
-fi
